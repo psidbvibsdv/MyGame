@@ -12,8 +12,8 @@ import main.GamePanel;
 public class TileManager {
     
 GamePanel gp;
-Tile[] tile;
-int mapTileNum[][];
+public Tile[] tile;
+public int mapTileNum[][];
 
 public TileManager(GamePanel gp){
 
@@ -38,10 +38,12 @@ public void getTileImage(){
         //right side of the circle bench
         tile[2] = new Tile();
         tile[2].image = ImageIO.read(getClass().getResourceAsStream("/res/tiles/circle2.png"));
+        tile[2].collision = true;
 
         //left side of the road
         tile[3] = new Tile();
         tile[3].image = ImageIO.read(getClass().getResourceAsStream("/res/tiles/roadleft.png"));
+        tile[3].collision = true; 
 
         //right side of the road
         tile[4] = new Tile();
@@ -81,19 +83,28 @@ public void getTileImage(){
 
         tile[14] = new Tile();
         tile[14].image = ImageIO.read(getClass().getResourceAsStream("/res/tiles/glassbottom.png"));
+        tile[14].collision = true;
+        
 
         tile[15] = new Tile();
         tile[15].image = ImageIO.read(getClass().getResourceAsStream("/res/tiles/glasstop.png"));
+        tile[15].collision = true;
 
         tile[16] = new Tile();
         tile[16].image = ImageIO.read(getClass().getResourceAsStream("/res/tiles/vamkWall.png"));
+        tile[16].collision = true;
 
         tile[17] = new Tile();
         tile[17].image = ImageIO.read(getClass().getResourceAsStream("/res/tiles/glassSmall.png"));
+        tile[17].collision = true;
 
         tile[18] = new Tile();
         tile[18].image = ImageIO.read(getClass().getResourceAsStream("/res/tiles/vamkorange.png"));
+        tile[18].collision = true;
 
+        tile[19] = new Tile();
+        tile[19].image = ImageIO.read(getClass().getResourceAsStream("/res/tiles/wall.png"));
+        tile[19].collision = true;
     } catch (IOException e) {
         e.printStackTrace();
     }
@@ -156,6 +167,7 @@ public void draw(Graphics2D g2){
     g2.drawImage(tile[16].image, 96, 0, gp.tileSize, gp.tileSize, null);
     g2.drawImage(tile[17].image, 96, 0, gp.tileSize, gp.tileSize, null);
     g2.drawImage(tile[18].image, 96, 0, gp.tileSize, gp.tileSize, null);
+    g2.drawImage(tile[19].image, 96, 0, gp.tileSize, gp.tileSize, null);
 
     int worldCol = 0;
 int worldRow = 0; 

@@ -1,6 +1,7 @@
 package entity;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
 
@@ -8,7 +9,6 @@ import javax.imageio.ImageIO;
 
 import main.KeyHandler;
 import main.GamePanel;
-
 public class Player extends Entity{
     
     GamePanel gp;
@@ -23,6 +23,8 @@ public class Player extends Entity{
 
         screenX = gp.screenWidth/2 - gp.tileSize/2;
         screenY = gp.screenHeight/2 - gp.tileSize/2;
+
+        solidArea = new Rectangle(0, 0, 32, 32);
 
         setDefaultValues();
         getPlayerImage();
@@ -57,19 +59,42 @@ public class Player extends Entity{
         if(kh.upPressed == true || kh.downPressed == true || kh.leftPressed == true || kh.rightPressed == true){
             if(kh.upPressed == true){
                 direction = "up";
-                worldY -= speed;
             }
             else if(kh.downPressed == true){
                 direction = "down";
-                worldY += speed;
             }
             else if(kh.leftPressed == true){
                 direction = "left";
-                worldX -= speed;
             }
             else if(kh.rightPressed == true){
                 direction = "right";
-                worldX += speed;
+            }
+
+            //Check tile collision
+            collisionOn = false;
+            gp.cChecker.checkTile(this);
+
+            //if collision is false, player can move
+            if (collisionOn == false) { 
+                switch (direction) {
+                    case "up":
+                    worldY -= speed;
+                        break;
+                    
+                    case "down":
+                    worldY += speed;
+                        break;
+        
+                    case "left":
+                    worldX -= speed;
+                        break;
+        
+                    case "right":
+                    worldX += speed;
+                        break;
+                
+                }
+        
             }
             spriteCounter++;
             if (spriteCounter > 15){
